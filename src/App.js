@@ -16,11 +16,13 @@ var BOOKS = [
   }
 ];
 
+
 const type2expr = {
   "currentlyReading" : "Currently Reading",
   "read" : "Read",
   "wantToRead" : "Want to Read"
 }
+
 
 class Book extends React.Component {
   render() {
@@ -67,6 +69,7 @@ class ShelfSelector extends React.Component{
   }
 }
 
+
 class Shelf extends React.Component {
   render() {
     // filter books that are in this shelf
@@ -89,20 +92,6 @@ class Shelf extends React.Component {
       </div>
     );
   }
-}
-
-const CLOSE_SEARCH = {
-  display: 'block',
-  top: '20px',
-  left: '15px',
-  width: '50px',
-  height: '53px',
-  background: 'white',
-  'backgroundImage': "url(./icons/arrow-back.svg)",
-  'backgroundPosition': 'center',
-  'backgroundRepeat': 'no-repeat',
-  'backgroundSize': '28px',
-  'fontSize': '0'
 }
 
 
@@ -140,16 +129,16 @@ class BookSearch extends React.Component {
     this.props.addBook(rememberedBook);
   }
 
-
   render() {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-        <Link
-          style={CLOSE_SEARCH}
-          to="/"
-          className="BookSearch"
-        >Library</Link>
+        <div className="close-search">
+          <Link
+            to="/"
+            className="BookSearch"
+          >Library</Link>
+        </div>
 
           {/*<a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>*/}
           <div className="search-books-input-wrapper">
@@ -170,6 +159,7 @@ class BookSearch extends React.Component {
   }
 }
 
+
 class SearchField extends React.Component {
   render() {
     return (
@@ -178,19 +168,6 @@ class SearchField extends React.Component {
   }
 }
 
-const OPEN_SEARCH = {
-  display: 'block',
-  width: '50px',
-  height: '50px',
-  borderradius: '50%',
-  background: '#2e7d32',
-  backgroundImage: 'url(./icons/add.svg)',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'center',
-  backgroundSize: '28px',
-  boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
-  fontSize: '0'
-}
 
 class BooksApp extends React.Component {
   constructor(props) {
@@ -242,11 +219,13 @@ class BooksApp extends React.Component {
               </div>
             </div>
 
-            <Link
-              style={OPEN_SEARCH}
-              to="/search"
-              className="BookSearch"
-            >Search</Link>
+            <div className="open-search">
+              <Link
+
+                to="/search"
+                className="BookSearch"
+              >Add a book</Link>
+            </div>
           </div>
         }/>
       </div>
