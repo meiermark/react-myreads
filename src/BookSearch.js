@@ -14,6 +14,23 @@ class BookSearch extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.mergeBooks = this.mergeBooks.bind(this);
+  }
+
+  mergeBooks(books) {
+    var knownBooks = this.props.knownBooks;
+
+    var updatedBooks = books.map((book) => {
+      var refBooks = knownBooks.filter((refBook) => refBook.id === book.id)
+      if(refBooks.length === 1) {
+        book.shelf = refBooks[0].shelf;
+      }
+      return book;
+    })
+
+    this.setState({
+      foundBooks: updatedBooks
+    })
   }
 
   handleChange(event) {
@@ -25,9 +42,7 @@ class BookSearch extends React.Component {
     });
 
     var newBooks = BooksAPI.search(newQuery, maxResults);
-    newBooks.then(val => this.setState({
-      foundBooks: val
-    }));
+    newBooks.then((books) => {this.mergeBooks(books)});
   }
 
   render() {
@@ -48,7 +63,7 @@ class BookSearch extends React.Component {
         <div className="search-books-results">
           <ol className="books-grid">
           {this.state.foundBooks.map(book => (
-            <li key={book.title}>
+            <li key={book.id}>
               <Book book={book} moveBook={this.props.moveBook}/>
             </li>
           ))}
