@@ -14,7 +14,6 @@ class BookSearch extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.rememberBook = this.rememberBook.bind(this);
   }
 
   handleChange(event) {
@@ -29,14 +28,6 @@ class BookSearch extends React.Component {
     newBooks.then(val => this.setState({
       foundBooks: val
     }));
-  }
-
-  rememberBook(event) {
-    var rememberedBook = this.state.foundBooks.filter(
-      book => book.title === event.target.name
-    )[0];
-    rememberedBook.shelf = event.target.value;
-    this.props.addBook(rememberedBook);
   }
 
   render() {
@@ -58,7 +49,7 @@ class BookSearch extends React.Component {
           <ol className="books-grid">
           {this.state.foundBooks.map(book => (
             <li key={book.title}>
-              <Book book={book} moveBook={this.rememberBook}/>
+              <Book book={book} moveBook={this.props.moveBook}/>
             </li>
           ))}
           </ol>

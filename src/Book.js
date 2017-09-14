@@ -32,23 +32,23 @@ class ShelfSelector extends React.Component{
   render() {
     return (
       <div className="book-shelf-changer">
-      <select name={this.props.book.title}
+      <select name={this.props.book.id}
         onChange={this.props.moveBook}
         defaultValue={this.props.book.shelf?this.props.book.shelf:"none"}>
 
         {/* diabled option with instructions for the selector */}
-        <option name={this.props.book.title} value="none" disabled>
+        <option name={this.props.book.id} value="none" disabled>
           Move to...
         </option>
         {/* add options for other shelfs */}
         {Object.keys(type2expr).map(shelf => (
-          <option key={shelf} name={this.props.book.title} value={shelf}>
+          <option key={shelf} name={this.props.book.id} value={shelf}>
             {type2expr[shelf]}
           </option>
         ))}
 
         {/* would hide the book but not remove it from the library */}
-        <option name={this.props.book.title} value="none">None</option>
+        <option name={this.props.book.id} value="none">None</option>
       </select>
       </div>
     );
